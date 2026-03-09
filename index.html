@@ -1,0 +1,629 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Drew Logan | CS 499 ePortfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ink: #11263d;
+        --ink-soft: #42576f;
+        --paper: #f6f1e8;
+        --paper-strong: #efe6d6;
+        --panel: rgba(255, 255, 255, 0.7);
+        --panel-border: rgba(17, 38, 61, 0.12);
+        --accent: #a6502d;
+        --accent-soft: #db8f63;
+        --shadow: 0 24px 60px rgba(17, 38, 61, 0.12);
+        --max-width: 1180px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Manrope", sans-serif;
+        color: var(--ink);
+        background:
+          radial-gradient(
+            circle at top left,
+            rgba(166, 80, 45, 0.16),
+            transparent 34%
+          ),
+          radial-gradient(
+            circle at bottom right,
+            rgba(17, 38, 61, 0.14),
+            transparent 30%
+          ),
+          linear-gradient(180deg, #fbf7f1 0%, var(--paper) 100%);
+        min-height: 100vh;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background-image:
+          linear-gradient(rgba(17, 38, 61, 0.02) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(17, 38, 61, 0.02) 1px, transparent 1px);
+        background-size: 30px 30px;
+        opacity: 0.55;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .shell {
+        position: relative;
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 1rem 1rem 4rem;
+      }
+
+      .masthead {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        backdrop-filter: blur(12px);
+        background: rgba(246, 241, 232, 0.8);
+        border-bottom: 1px solid rgba(17, 38, 61, 0.08);
+      }
+
+      .masthead-inner {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 0.9rem 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem 1rem;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 0.85rem;
+      }
+
+      .brand-mark {
+        width: 2.8rem;
+        height: 2.8rem;
+        border-radius: 0.9rem;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(135deg, var(--ink), #284b71);
+        color: #fff;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        box-shadow: var(--shadow);
+      }
+
+      .brand-copy span {
+        display: block;
+      }
+
+      .brand-copy .eyebrow {
+        font-size: 0.75rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--ink-soft);
+      }
+
+      .brand-copy .title {
+        font-family: "Libre Baskerville", serif;
+        font-size: 1rem;
+        font-weight: 700;
+      }
+
+      .nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.45rem;
+        justify-content: flex-end;
+      }
+
+      .nav a {
+        min-height: 44px;
+        padding: 0.7rem 0.95rem;
+        border-radius: 999px;
+        border: 1px solid transparent;
+        color: var(--ink-soft);
+        font-size: 0.92rem;
+        font-weight: 600;
+        transition: 180ms ease;
+      }
+
+      .nav a:hover,
+      .nav a:focus-visible {
+        border-color: rgba(17, 38, 61, 0.12);
+        background: rgba(255, 255, 255, 0.58);
+        color: var(--ink);
+        outline: none;
+      }
+
+      .hero {
+        padding: 3rem 0 2rem;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .hero-card,
+      .portfolio-grid article,
+      .highlight,
+      .footer-note {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid var(--panel-border);
+        background: var(--panel);
+        border-radius: 1.6rem;
+        box-shadow: var(--shadow);
+      }
+
+      .hero-card {
+        padding: 1.4rem;
+      }
+
+      .hero-card::after,
+      .portfolio-grid article::after,
+      .highlight::after,
+      .footer-note::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.22),
+          transparent 50%
+        );
+        pointer-events: none;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .hero-title {
+        font-family: "Libre Baskerville", serif;
+        font-size: clamp(2.4rem, 8vw, 4.8rem);
+        line-height: 1.06;
+        margin: 0;
+        max-width: 12ch;
+      }
+
+      .hero-kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        margin-bottom: 1.1rem;
+        padding: 0.45rem 0.8rem;
+        border-radius: 999px;
+        background: rgba(17, 38, 61, 0.06);
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        color: var(--ink-soft);
+        font-weight: 800;
+      }
+
+      .hero-kicker::before {
+        content: "";
+        width: 0.55rem;
+        height: 0.55rem;
+        border-radius: 999px;
+        background: var(--accent);
+        box-shadow: 0 0 0 6px rgba(166, 80, 45, 0.16);
+      }
+
+      .hero-copy {
+        margin: 1.2rem 0 0;
+        max-width: 62ch;
+        color: var(--ink-soft);
+        font-size: 1.02rem;
+        line-height: 1.8;
+      }
+
+      .hero-aside {
+        display: grid;
+        gap: 1rem;
+      }
+
+      .url-card {
+        padding: 1.15rem;
+        border-radius: 1.2rem;
+        background: linear-gradient(160deg, var(--ink) 0%, #203f61 100%);
+        color: #f8f3ea;
+      }
+
+      .url-card .label {
+        display: block;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        opacity: 0.75;
+        margin-bottom: 0.75rem;
+      }
+
+      .url-card .value {
+        display: block;
+        font-size: 0.95rem;
+        line-height: 1.6;
+        word-break: break-word;
+        font-weight: 700;
+      }
+
+      .stat-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.8rem;
+      }
+
+      .stat {
+        padding: 1rem;
+        border-radius: 1.1rem;
+        background: rgba(17, 38, 61, 0.04);
+        border: 1px solid rgba(17, 38, 61, 0.06);
+      }
+
+      .stat strong {
+        display: block;
+        font-family: "Libre Baskerville", serif;
+        font-size: 1.45rem;
+        margin-bottom: 0.2rem;
+      }
+
+      .stat span {
+        color: var(--ink-soft);
+        font-size: 0.92rem;
+      }
+
+      .section-heading {
+        display: flex;
+        flex-direction: column;
+        gap: 0.45rem;
+        margin: 1.4rem 0 1rem;
+      }
+
+      .section-heading .eyebrow {
+        color: var(--accent);
+        font-size: 0.76rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+      }
+
+      .section-heading h2 {
+        margin: 0;
+        font-family: "Libre Baskerville", serif;
+        font-size: clamp(1.7rem, 5vw, 2.6rem);
+        line-height: 1.16;
+      }
+
+      .section-heading p {
+        margin: 0;
+        max-width: 64ch;
+        color: var(--ink-soft);
+        line-height: 1.8;
+      }
+
+      .portfolio-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .portfolio-grid article {
+        padding: 1.25rem;
+        min-height: 100%;
+      }
+
+      .portfolio-grid .tag {
+        display: inline-block;
+        margin-bottom: 0.85rem;
+        padding: 0.4rem 0.72rem;
+        border-radius: 999px;
+        background: rgba(166, 80, 45, 0.12);
+        color: var(--accent);
+        font-size: 0.76rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+      }
+
+      .portfolio-grid h3 {
+        margin: 0 0 0.75rem;
+        font-size: 1.22rem;
+      }
+
+      .portfolio-grid p {
+        margin: 0 0 1rem;
+        color: var(--ink-soft);
+        line-height: 1.75;
+        font-size: 0.97rem;
+      }
+
+      .portfolio-grid ul {
+        margin: 0;
+        padding-left: 1.2rem;
+        color: var(--ink);
+        line-height: 1.8;
+      }
+
+      .highlight {
+        margin-top: 1rem;
+        padding: 1.3rem;
+        background:
+          linear-gradient(135deg, rgba(166, 80, 45, 0.08), transparent 35%),
+          rgba(255, 255, 255, 0.74);
+      }
+
+      .highlight h3 {
+        margin: 0 0 0.8rem;
+        font-size: 1.1rem;
+      }
+
+      .highlight p {
+        margin: 0;
+        line-height: 1.8;
+        color: var(--ink-soft);
+      }
+
+      .footer-note {
+        margin-top: 1rem;
+        padding: 1rem 1.1rem;
+        background: rgba(17, 38, 61, 0.05);
+        color: var(--ink-soft);
+        line-height: 1.75;
+        font-size: 0.94rem;
+      }
+
+      @media (min-width: 768px) {
+        .shell {
+          padding: 1.2rem 1.5rem 4rem;
+        }
+
+        .masthead-inner {
+          padding: 1rem 1.5rem;
+        }
+
+        .hero-card {
+          padding: 1.8rem;
+        }
+
+        .hero-grid {
+          grid-template-columns: minmax(0, 1.35fr) minmax(18rem, 0.85fr);
+          align-items: start;
+        }
+
+        .portfolio-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (min-width: 1024px) {
+        .hero {
+          padding-top: 3.4rem;
+        }
+
+        .portfolio-grid {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .section-heading {
+          margin-top: 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="masthead">
+      <div class="masthead-inner">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true">DL</div>
+          <div class="brand-copy">
+            <span class="eyebrow">CS 499 ePortfolio</span>
+            <span class="title">Drew Logan</span>
+          </div>
+        </div>
+        <nav class="nav" aria-label="Portfolio Sections">
+          <a href="#code-review">Code Review</a>
+          <a href="#software-engineering">Software Engineering</a>
+          <a href="#algorithms">Algorithms</a>
+          <a href="#databases">Databases</a>
+          <a href="#narratives">Narratives</a>
+          <a href="#self-assessment">Self-Assessment</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="shell">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-card">
+          <div class="hero-grid">
+            <div>
+              <span class="hero-kicker">Portfolio Home Page</span>
+              <h1 class="hero-title" id="hero-title">
+                Backend and data-driven software work, collected in one place.
+              </h1>
+              <p class="hero-copy">
+                I am Drew Logan, a Computer Science student building this CS 499
+                ePortfolio to present original coursework, enhancement plans,
+                and reflective analysis in a format that shows how my work has
+                grown into a cohesive backend and full-stack engineering
+                portfolio.
+              </p>
+            </div>
+
+            <aside class="hero-aside" aria-label="Portfolio Summary">
+              <div class="url-card">
+                <span class="label">GitHub Pages URL</span>
+                <span class="value"
+                  >https://alogansnhu.github.io/cs499-portfolio/</span
+                >
+              </div>
+              <div class="stat-grid">
+                <div class="stat">
+                  <strong>2</strong>
+                  <span>Core artifacts reused for enhancement planning</span>
+                </div>
+                <div class="stat">
+                  <strong>3</strong>
+                  <span>Computer science categories represented</span>
+                </div>
+                <div class="stat">
+                  <strong>5</strong>
+                  <span>CS 499 course outcomes addressed</span>
+                </div>
+                <div class="stat">
+                  <strong>1</strong>
+                  <span>Integrated professional portfolio direction</span>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="portfolio-sections">
+        <div class="section-heading">
+          <span class="eyebrow">Site Map</span>
+          <h2 id="portfolio-sections">Portfolio Sections</h2>
+          <p>
+            This site organizes the CS 499 capstone materials into the sections
+            required for the ePortfolio and the final project narratives. Each
+            section is staged here so it can be expanded as enhancements are
+            completed during the course.
+          </p>
+        </div>
+
+        <div class="portfolio-grid">
+          <article id="code-review">
+            <span class="tag">Code Review</span>
+            <h3>Code Review</h3>
+            <p>
+              Findings and observations from reviewing the selected artifacts,
+              with a focus on quality, maintainability, technical debt, and
+              security-sensitive design choices.
+            </p>
+            <ul>
+              <li>Architecture and validation review</li>
+              <li>Risk and defect identification</li>
+              <li>Security-minded analysis</li>
+            </ul>
+          </article>
+
+          <article id="software-engineering">
+            <span class="tag">Category One</span>
+            <h3>Software Engineering and Design Artifact</h3>
+            <p>
+              Planned work built around the CS-320 Java service suite,
+              emphasizing shared interfaces, layered design, and maintainable
+              backend architecture.
+            </p>
+            <ul>
+              <li>Modular service contracts</li>
+              <li>Repository abstraction</li>
+              <li>Facade and validation layers</li>
+            </ul>
+          </article>
+
+          <article id="algorithms">
+            <span class="tag">Category Two</span>
+            <h3>Algorithms and Data Structures Artifact</h3>
+            <p>
+              A distinct enhancement path for the same CS-320 artifact, centered
+              on indexed retrieval, scheduling logic, conflict detection, and
+              data-structure trade-offs.
+            </p>
+            <ul>
+              <li>Hash-based ID lookup</li>
+              <li>Ordered scheduling indexes</li>
+              <li>Priority-driven task retrieval</li>
+            </ul>
+          </article>
+
+          <article id="databases">
+            <span class="tag">Category Three</span>
+            <h3>Databases Artifact</h3>
+            <p>
+              Database-centered enhancement planning for the CS-340 animal
+              shelter CRUD layer and Dash dashboard, with stronger analytics and
+              safer query configuration.
+            </p>
+            <ul>
+              <li>MongoDB filtering and aggregation</li>
+              <li>Environment-based configuration</li>
+              <li>Decision-support dashboards</li>
+            </ul>
+          </article>
+
+          <article id="narratives">
+            <span class="tag">Narratives</span>
+            <h3>Narratives</h3>
+            <p>
+              Written explanations that connect each enhancement to design
+              decisions, course outcomes, implementation trade-offs, and
+              audience-focused communication.
+            </p>
+            <ul>
+              <li>Enhancement rationale</li>
+              <li>Trade-off analysis</li>
+              <li>Outcome alignment</li>
+            </ul>
+          </article>
+
+          <article id="self-assessment">
+            <span class="tag">Reflection</span>
+            <h3>Professional Self-Assessment</h3>
+            <p>
+              A capstone reflection that synthesizes software design,
+              algorithms, databases, testing, communication, and security
+              awareness into one professional narrative.
+            </p>
+            <ul>
+              <li>Program growth reflection</li>
+              <li>Career alignment</li>
+              <li>Professional quality standards</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="highlight" aria-label="Portfolio Direction">
+          <h3>Portfolio Direction</h3>
+          <p>
+            The overall goal of this ePortfolio is to show growth from isolated
+            coursework submissions into an integrated body of backend and
+            full-stack work that manages structured data, supports
+            decision-making, and communicates technical decisions clearly to
+            multiple audiences.
+          </p>
+        </div>
+
+        <div class="footer-note">
+          Prepared as the home page for the CS 499 ePortfolio. This page is
+          intentionally concise so it functions as a clear entry point for
+          artifact links, enhancement narratives, and the final professional
+          self-assessment.
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
