@@ -12,15 +12,16 @@
     />
     <style>
       :root {
-        --ink: #11263d;
-        --ink-soft: #42576f;
-        --paper: #f6f1e8;
-        --paper-strong: #efe6d6;
-        --panel: rgba(255, 255, 255, 0.7);
-        --panel-border: rgba(17, 38, 61, 0.12);
-        --accent: #a6502d;
-        --accent-soft: #db8f63;
-        --shadow: 0 24px 60px rgba(17, 38, 61, 0.12);
+        --ink: #10253d;
+        --ink-soft: #4b6178;
+        --paper: #f4efe6;
+        --paper-strong: #efe4d3;
+        --surface: rgba(255, 255, 255, 0.74);
+        --surface-strong: rgba(255, 255, 255, 0.88);
+        --line: rgba(16, 37, 61, 0.12);
+        --accent: #a24d2a;
+        --accent-soft: #d58a63;
+        --shadow: 0 22px 60px rgba(16, 37, 61, 0.12);
         --max-width: 1180px;
       }
 
@@ -34,21 +35,20 @@
 
       body {
         margin: 0;
-        font-family: "Manrope", sans-serif;
         color: var(--ink);
+        font-family: "Manrope", sans-serif;
         background:
           radial-gradient(
             circle at top left,
-            rgba(166, 80, 45, 0.16),
+            rgba(162, 77, 42, 0.18),
             transparent 34%
           ),
           radial-gradient(
             circle at bottom right,
-            rgba(17, 38, 61, 0.14),
+            rgba(16, 37, 61, 0.14),
             transparent 30%
           ),
-          linear-gradient(180deg, #fbf7f1 0%, var(--paper) 100%);
-        min-height: 100vh;
+          linear-gradient(180deg, #fbf7f2 0%, var(--paper) 100%);
       }
 
       body::before {
@@ -57,9 +57,9 @@
         inset: 0;
         pointer-events: none;
         background-image:
-          linear-gradient(rgba(17, 38, 61, 0.02) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(17, 38, 61, 0.02) 1px, transparent 1px);
-        background-size: 30px 30px;
+          linear-gradient(rgba(16, 37, 61, 0.02) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(16, 37, 61, 0.02) 1px, transparent 1px);
+        background-size: 32px 32px;
         opacity: 0.55;
       }
 
@@ -68,61 +68,71 @@
         text-decoration: none;
       }
 
-      .shell {
-        position: relative;
-        max-width: var(--max-width);
-        margin: 0 auto;
-        padding: 1rem 1rem 4rem;
+      img,
+      video {
+        display: block;
+        max-width: 100%;
+      }
+
+      section {
+        scroll-margin-top: 6rem;
       }
 
       .masthead {
         position: sticky;
         top: 0;
         z-index: 20;
-        backdrop-filter: blur(12px);
-        background: rgba(246, 241, 232, 0.8);
-        border-bottom: 1px solid rgba(17, 38, 61, 0.08);
+        backdrop-filter: blur(14px);
+        background: rgba(244, 239, 230, 0.84);
+        border-bottom: 1px solid rgba(16, 37, 61, 0.08);
+      }
+
+      .masthead-inner,
+      .shell,
+      .band-inner {
+        width: min(calc(100% - 2rem), var(--max-width));
+        margin: 0 auto;
       }
 
       .masthead-inner {
-        max-width: var(--max-width);
-        margin: 0 auto;
-        padding: 0.9rem 1rem;
         display: flex;
-        flex-wrap: wrap;
         align-items: center;
         justify-content: space-between;
-        gap: 0.75rem 1rem;
+        gap: 1rem;
+        padding: 0.9rem 0;
       }
 
       .brand {
         display: flex;
         align-items: center;
-        gap: 0.85rem;
+        gap: 0.9rem;
       }
 
       .brand-mark {
         width: 2.8rem;
         height: 2.8rem;
-        border-radius: 0.9rem;
         display: grid;
         place-items: center;
-        background: linear-gradient(135deg, var(--ink), #284b71);
+        border-radius: 0.95rem;
         color: #fff;
         font-weight: 800;
         letter-spacing: 0.08em;
+        background: linear-gradient(135deg, var(--ink), #284b71);
         box-shadow: var(--shadow);
+      }
+
+      .eyebrow {
+        display: inline-block;
+        margin-bottom: 0.85rem;
+        color: var(--ink-soft);
+        font-size: 0.78rem;
+        font-weight: 800;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
       }
 
       .brand-copy span {
         display: block;
-      }
-
-      .brand-copy .eyebrow {
-        font-size: 0.75rem;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        color: var(--ink-soft);
       }
 
       .brand-copy .title {
@@ -131,304 +141,439 @@
         font-weight: 700;
       }
 
+      .brand-copy .subtitle {
+        color: var(--ink-soft);
+        font-size: 0.78rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
       .nav {
         display: flex;
         flex-wrap: wrap;
-        gap: 0.45rem;
         justify-content: flex-end;
+        gap: 0.15rem;
       }
 
       .nav a {
-        min-height: 44px;
-        padding: 0.7rem 0.95rem;
+        min-height: 42px;
+        padding: 0.62rem 0.72rem;
         border-radius: 999px;
-        border: 1px solid transparent;
         color: var(--ink-soft);
-        font-size: 0.92rem;
+        font-size: 0.88rem;
         font-weight: 600;
         transition: 180ms ease;
       }
 
       .nav a:hover,
       .nav a:focus-visible {
-        border-color: rgba(17, 38, 61, 0.12);
-        background: rgba(255, 255, 255, 0.58);
+        background: rgba(255, 255, 255, 0.68);
         color: var(--ink);
         outline: none;
       }
 
-      .hero {
-        padding: 3rem 0 2rem;
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
+      .shell {
+        padding: 2rem 0 4rem;
       }
 
-      .hero-card,
-      .portfolio-grid article,
-      .highlight,
-      .footer-note {
+      .hero {
         position: relative;
         overflow: hidden;
-        border: 1px solid var(--panel-border);
-        background: var(--panel);
-        border-radius: 1.6rem;
+        padding: 2rem;
+        border: 1px solid var(--line);
+        border-radius: 2rem;
+        background:
+          linear-gradient(
+            125deg,
+            rgba(255, 255, 255, 0.86),
+            rgba(255, 255, 255, 0.56)
+          ),
+          linear-gradient(140deg, rgba(162, 77, 42, 0.08), transparent 45%);
         box-shadow: var(--shadow);
       }
 
-      .hero-card {
-        padding: 1.4rem;
-      }
-
-      .hero-card::after,
-      .portfolio-grid article::after,
-      .highlight::after,
-      .footer-note::after {
+      .hero::after {
         content: "";
         position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          135deg,
-          rgba(255, 255, 255, 0.22),
-          transparent 50%
+        right: -5%;
+        top: -20%;
+        width: 22rem;
+        height: 22rem;
+        border-radius: 999px;
+        background: radial-gradient(
+          circle,
+          rgba(162, 77, 42, 0.16) 0%,
+          rgba(162, 77, 42, 0.04) 42%,
+          transparent 72%
         );
-        pointer-events: none;
       }
 
       .hero-grid {
+        position: relative;
+        z-index: 1;
         display: grid;
-        grid-template-columns: 1fr;
-        gap: 1rem;
+        grid-template-columns: minmax(0, 1.65fr) minmax(16rem, 0.95fr);
+        gap: 1.8rem;
+        align-items: start;
       }
 
-      .hero-title {
+      .hero h1,
+      .section-heading h2,
+      .story h3,
+      .outcome-table h3,
+      .download-board h3 {
         font-family: "Libre Baskerville", serif;
-        font-size: clamp(2.4rem, 8vw, 4.8rem);
-        line-height: 1.06;
+      }
+
+      .hero h1 {
         margin: 0;
         max-width: 12ch;
+        font-size: clamp(2.6rem, 7vw, 5rem);
+        line-height: 1.03;
       }
 
-      .hero-kicker {
+      .hero p {
+        max-width: 60ch;
+      }
+
+      .lede {
+        margin: 1.35rem 0 0;
+        color: var(--ink-soft);
+        font-size: 1.03rem;
+        line-height: 1.85;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+        margin-top: 1.6rem;
+      }
+
+      .button {
         display: inline-flex;
         align-items: center;
-        gap: 0.6rem;
-        margin-bottom: 1.1rem;
-        padding: 0.45rem 0.8rem;
+        justify-content: center;
+        min-height: 46px;
+        padding: 0.82rem 1.1rem;
         border-radius: 999px;
-        background: rgba(17, 38, 61, 0.06);
-        font-size: 0.8rem;
-        text-transform: uppercase;
-        letter-spacing: 0.16em;
-        color: var(--ink-soft);
-        font-weight: 800;
-      }
-
-      .hero-kicker::before {
-        content: "";
-        width: 0.55rem;
-        height: 0.55rem;
-        border-radius: 999px;
-        background: var(--accent);
-        box-shadow: 0 0 0 6px rgba(166, 80, 45, 0.16);
-      }
-
-      .hero-copy {
-        margin: 1.2rem 0 0;
-        max-width: 62ch;
-        color: var(--ink-soft);
-        font-size: 1.02rem;
-        line-height: 1.8;
-      }
-
-      .hero-aside {
-        display: grid;
-        gap: 1rem;
-      }
-
-      .url-card {
-        padding: 1.15rem;
-        border-radius: 1.2rem;
-        background: linear-gradient(160deg, var(--ink) 0%, #203f61 100%);
-        color: #f8f3ea;
-      }
-
-      .url-card .label {
-        display: block;
-        font-size: 0.8rem;
-        text-transform: uppercase;
-        letter-spacing: 0.16em;
-        opacity: 0.75;
-        margin-bottom: 0.75rem;
-      }
-
-      .url-card .value {
-        display: block;
-        font-size: 0.95rem;
-        line-height: 1.6;
-        word-break: break-word;
+        border: 1px solid transparent;
         font-weight: 700;
       }
 
-      .stat-grid {
+      .button.primary {
+        background: linear-gradient(135deg, var(--ink), #284b71);
+        color: #fff;
+      }
+
+      .button.secondary {
+        background: rgba(255, 255, 255, 0.7);
+        border-color: var(--line);
+      }
+
+      .hero-aside {
+        padding: 1.2rem;
+        border-radius: 1.4rem;
+        border: 1px solid rgba(16, 37, 61, 0.1);
+        background: rgba(16, 37, 61, 0.05);
+      }
+
+      .hero-aside h2 {
+        margin: 0 0 1rem;
+        font-size: 1rem;
+        font-family: "Libre Baskerville", serif;
+      }
+
+      .hero-facts {
+        display: grid;
+        gap: 0.85rem;
+      }
+
+      .hero-facts div {
+        padding-bottom: 0.8rem;
+        border-bottom: 1px solid rgba(16, 37, 61, 0.1);
+      }
+
+      .hero-facts div:last-child {
+        padding-bottom: 0;
+        border-bottom: 0;
+      }
+
+      .hero-facts strong {
+        display: block;
+        margin-bottom: 0.25rem;
+        font-size: 0.76rem;
+        color: var(--ink-soft);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .hero-facts span {
+        font-size: 0.95rem;
+        line-height: 1.65;
+      }
+
+      .band {
+        margin-top: 1.35rem;
+        padding: 1.6rem 0 0;
+      }
+
+      .band-inner {
+        padding: 1.75rem 0 0;
+        border-top: 1px solid rgba(16, 37, 61, 0.12);
+      }
+
+      .section-heading {
+        max-width: 56rem;
+        margin-bottom: 1.35rem;
+      }
+
+      .section-heading h2 {
+        margin: 0 0 0.7rem;
+        font-size: clamp(1.85rem, 3.5vw, 2.7rem);
+        line-height: 1.15;
+      }
+
+      .section-heading p,
+      .story p,
+      .story li,
+      .download-board li,
+      .download-board p,
+      td,
+      th {
+        color: var(--ink-soft);
+        line-height: 1.8;
+      }
+
+      .assessment-grid,
+      .story-grid,
+      .download-grid {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 0.8rem;
+        gap: 1.3rem;
       }
 
-      .stat {
+      .surface {
+        padding: 1.35rem;
+        border: 1px solid var(--line);
+        border-radius: 1.5rem;
+        background: var(--surface);
+        box-shadow: var(--shadow);
+      }
+
+      .surface strong.label,
+      .mini-title {
+        display: inline-block;
+        margin-bottom: 0.6rem;
+        color: var(--ink-soft);
+        font-size: 0.78rem;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .surface h3,
+      .story h3,
+      .download-board h3,
+      .outcome-table h3 {
+        margin: 0 0 0.8rem;
+        font-size: 1.22rem;
+      }
+
+      .surface p:last-child,
+      .story p:last-child {
+        margin-bottom: 0;
+      }
+
+      .story {
+        display: grid;
+        gap: 1rem;
+      }
+
+      .story-grid {
+        align-items: start;
+      }
+
+      .story-copy {
+        display: grid;
+        gap: 1rem;
+      }
+
+      .artifact-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.45rem;
+      }
+
+      .artifact-meta span {
+        padding: 0.45rem 0.7rem;
+        border-radius: 999px;
+        background: rgba(16, 37, 61, 0.06);
+        color: var(--ink-soft);
+        font-size: 0.82rem;
+        font-weight: 700;
+      }
+
+      .evidence-list,
+      .download-board ul {
+        margin: 0;
+        padding-left: 1.1rem;
+      }
+
+      .comparison-table,
+      .outcome-table table {
+        width: 100%;
+        border-collapse: collapse;
+        overflow: hidden;
+      }
+
+      .comparison-table th,
+      .comparison-table td,
+      .outcome-table th,
+      .outcome-table td {
+        padding: 0.9rem 0;
+        border-bottom: 1px solid rgba(16, 37, 61, 0.1);
+        text-align: left;
+        vertical-align: top;
+      }
+
+      .comparison-table th,
+      .outcome-table th {
+        color: var(--ink);
+        font-size: 0.84rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .code-block {
+        overflow-x: auto;
+        padding: 1rem;
+        border-radius: 1rem;
+        background: #0f2238;
+        color: #edf2f7;
+        font-size: 0.88rem;
+        line-height: 1.6;
+      }
+
+      .code-block code {
+        font-family:
+          ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+          "Liberation Mono", "Courier New", monospace;
+      }
+
+      .media-shell {
+        overflow: hidden;
+        border-radius: 1.45rem;
+        border: 1px solid rgba(16, 37, 61, 0.12);
+        background: var(--surface-strong);
+        box-shadow: var(--shadow);
+      }
+
+      .media-shell video {
+        width: 100%;
+        background: #000;
+      }
+
+      .proof-strip {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+
+      .proof-strip div {
         padding: 1rem;
         border-radius: 1.1rem;
-        background: rgba(17, 38, 61, 0.04);
-        border: 1px solid rgba(17, 38, 61, 0.06);
+        border: 1px solid rgba(16, 37, 61, 0.1);
+        background: rgba(255, 255, 255, 0.62);
       }
 
-      .stat strong {
+      .proof-strip strong {
         display: block;
-        font-family: "Libre Baskerville", serif;
-        font-size: 1.45rem;
-        margin-bottom: 0.2rem;
+        margin-bottom: 0.35rem;
+        font-size: 0.78rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--ink-soft);
       }
 
-      .stat span {
+      .outcome-table {
+        padding: 1.4rem;
+        border-radius: 1.6rem;
+        border: 1px solid var(--line);
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.86),
+          rgba(255, 255, 255, 0.68)
+        );
+        box-shadow: var(--shadow);
+      }
+
+      .download-board {
+        padding: 1.35rem;
+        border: 1px solid var(--line);
+        border-radius: 1.5rem;
+        background: var(--surface);
+        box-shadow: var(--shadow);
+      }
+
+      .download-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.7rem;
+        margin-top: 0.9rem;
+      }
+
+      .download-links a {
+        padding: 0.7rem 0.9rem;
+        border-radius: 0.9rem;
+        border: 1px solid rgba(16, 37, 61, 0.12);
+        background: rgba(255, 255, 255, 0.74);
+        font-weight: 600;
+      }
+
+      .note {
+        margin-top: 0.9rem;
+        color: var(--ink-soft);
+        font-size: 0.9rem;
+      }
+
+      .footer {
+        padding: 2rem 0 1rem;
         color: var(--ink-soft);
         font-size: 0.92rem;
       }
 
-      .section-heading {
-        display: flex;
-        flex-direction: column;
-        gap: 0.45rem;
-        margin: 1.4rem 0 1rem;
-      }
-
-      .section-heading .eyebrow {
-        color: var(--accent);
-        font-size: 0.76rem;
-        font-weight: 800;
-        text-transform: uppercase;
-        letter-spacing: 0.18em;
-      }
-
-      .section-heading h2 {
-        margin: 0;
-        font-family: "Libre Baskerville", serif;
-        font-size: clamp(1.7rem, 5vw, 2.6rem);
-        line-height: 1.16;
-      }
-
-      .section-heading p {
-        margin: 0;
-        max-width: 64ch;
-        color: var(--ink-soft);
-        line-height: 1.8;
-      }
-
-      .portfolio-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 1rem;
-      }
-
-      .portfolio-grid article {
-        padding: 1.25rem;
-        min-height: 100%;
-      }
-
-      .portfolio-grid .tag {
-        display: inline-block;
-        margin-bottom: 0.85rem;
-        padding: 0.4rem 0.72rem;
-        border-radius: 999px;
-        background: rgba(166, 80, 45, 0.12);
-        color: var(--accent);
-        font-size: 0.76rem;
-        font-weight: 800;
-        text-transform: uppercase;
-        letter-spacing: 0.16em;
-      }
-
-      .portfolio-grid h3 {
-        margin: 0 0 0.75rem;
-        font-size: 1.22rem;
-      }
-
-      .portfolio-grid p {
-        margin: 0 0 1rem;
-        color: var(--ink-soft);
-        line-height: 1.75;
-        font-size: 0.97rem;
-      }
-
-      .portfolio-grid ul {
-        margin: 0;
-        padding-left: 1.2rem;
-        color: var(--ink);
-        line-height: 1.8;
-      }
-
-      .highlight {
-        margin-top: 1rem;
-        padding: 1.3rem;
-        background:
-          linear-gradient(135deg, rgba(166, 80, 45, 0.08), transparent 35%),
-          rgba(255, 255, 255, 0.74);
-      }
-
-      .highlight h3 {
-        margin: 0 0 0.8rem;
-        font-size: 1.1rem;
-      }
-
-      .highlight p {
-        margin: 0;
-        line-height: 1.8;
-        color: var(--ink-soft);
-      }
-
-      .footer-note {
-        margin-top: 1rem;
-        padding: 1rem 1.1rem;
-        background: rgba(17, 38, 61, 0.05);
-        color: var(--ink-soft);
-        line-height: 1.75;
-        font-size: 0.94rem;
-      }
-
-      @media (min-width: 768px) {
-        .shell {
-          padding: 1.2rem 1.5rem 4rem;
+      @media (max-width: 980px) {
+        .hero-grid,
+        .assessment-grid,
+        .story-grid,
+        .download-grid,
+        .proof-strip {
+          grid-template-columns: 1fr;
         }
 
-        .masthead-inner {
-          padding: 1rem 1.5rem;
-        }
-
-        .hero-card {
-          padding: 1.8rem;
-        }
-
-        .hero-grid {
-          grid-template-columns: minmax(0, 1.35fr) minmax(18rem, 0.85fr);
-          align-items: start;
-        }
-
-        .portfolio-grid {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
-      }
-
-      @media (min-width: 1024px) {
         .hero {
-          padding-top: 3.4rem;
+          padding: 1.5rem;
+        }
+      }
+
+      @media (max-width: 760px) {
+        .masthead-inner {
+          align-items: flex-start;
+          flex-direction: column;
         }
 
-        .portfolio-grid {
-          grid-template-columns: repeat(3, minmax(0, 1fr));
+        .nav {
+          justify-content: flex-start;
         }
 
-        .section-heading {
-          margin-top: 2rem;
+        .hero h1 {
+          max-width: 100%;
+        }
+
+        .shell {
+          padding-top: 1.2rem;
         }
       }
     </style>
@@ -439,189 +584,1030 @@
         <div class="brand">
           <div class="brand-mark" aria-hidden="true">DL</div>
           <div class="brand-copy">
-            <span class="eyebrow">CS 499 ePortfolio</span>
             <span class="title">Drew Logan</span>
+            <span class="subtitle">CS 499 Computer Science Capstone</span>
           </div>
         </div>
-        <nav class="nav" aria-label="Portfolio Sections">
+        <nav class="nav" aria-label="Portfolio Navigation">
+          <a href="#self-assessment">Self-Assessment</a>
           <a href="#code-review">Code Review</a>
           <a href="#software-engineering">Software Engineering</a>
           <a href="#algorithms">Algorithms</a>
           <a href="#databases">Databases</a>
-          <a href="#narratives">Narratives</a>
-          <a href="#self-assessment">Self-Assessment</a>
+          <a href="#outcomes">Outcomes</a>
+          <a href="#downloads">Downloads</a>
         </nav>
       </div>
     </header>
 
     <main class="shell">
       <section class="hero" aria-labelledby="hero-title">
-        <div class="hero-card">
-          <div class="hero-grid">
-            <div>
-              <span class="hero-kicker">Portfolio Home Page</span>
-              <h1 class="hero-title" id="hero-title">
-                Backend and data-driven software work, collected in one place.
-              </h1>
-              <p class="hero-copy">
-                I am Drew Logan, a Computer Science student building this CS 499
-                ePortfolio to present original coursework, enhancement plans,
-                and reflective analysis in a format that shows how my work has
-                grown into a cohesive backend and full-stack engineering
-                portfolio.
-              </p>
+        <div class="hero-grid">
+          <div>
+            <span class="eyebrow">Professional ePortfolio</span>
+            <h1 id="hero-title">
+              Designing secure, data-driven systems that are easier to reason
+              about, test, and extend.
+            </h1>
+            <p class="lede">
+              This CS 499 ePortfolio presents the code review, narratives,
+              original artifacts, and enhanced source bundles that document my
+              growth from course-level assignments into more maintainable
+              backend and full-stack software work. The portfolio centers on two
+              artifacts: a MongoDB-backed animal shelter dashboard from CS 340
+              and a Java service suite from CS 320.
+            </p>
+            <div class="hero-actions">
+              <a class="button primary" href="#self-assessment"
+                >Read the self-assessment</a
+              >
+              <a class="button secondary" href="#downloads"
+                >Open final deliverables</a
+              >
             </div>
+          </div>
 
-            <aside class="hero-aside" aria-label="Portfolio Summary">
-              <div class="url-card">
-                <span class="label">GitHub Pages URL</span>
-                <span class="value">https://alogansnhu.github.io</span>
+          <aside class="hero-aside" aria-label="Portfolio Summary">
+            <h2>Portfolio at a glance</h2>
+            <div class="hero-facts">
+              <div>
+                <strong>Focus</strong>
+                <span
+                  >Backend, service design, and database-backed systems</span
+                >
               </div>
-              <div class="stat-grid">
-                <div class="stat">
-                  <strong>2</strong>
-                  <span>Core artifacts reused for enhancement planning</span>
-                </div>
-                <div class="stat">
-                  <strong>3</strong>
-                  <span>Computer science categories represented</span>
-                </div>
-                <div class="stat">
-                  <strong>5</strong>
-                  <span>CS 499 course outcomes addressed</span>
-                </div>
-                <div class="stat">
-                  <strong>1</strong>
-                  <span>Integrated professional portfolio direction</span>
-                </div>
+              <div>
+                <strong>Coverage</strong>
+                <span
+                  >2 core artifacts across software engineering, algorithms, and
+                  databases</span
+                >
               </div>
-            </aside>
+              <div>
+                <strong>Verified locally</strong>
+                <span
+                  >Python smoke test passed; Java sources compiled and demo ran
+                  successfully</span
+                >
+              </div>
+              <div>
+                <strong>Published URL</strong>
+                <span>https://alogansnhu.github.io</span>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="band" id="self-assessment">
+        <div class="band-inner">
+          <div class="section-heading">
+            <span class="eyebrow">Professional Self-Assessment</span>
+            <h2>
+              The self-assessment is presented first because it frames the
+              entire portfolio.
+            </h2>
+            <p>
+              The capstone required more than collecting artifacts. It required
+              me to explain how coursework across the computer science program
+              changed the way I design systems, communicate decisions, and apply
+              security-minded thinking to real code.
+            </p>
+          </div>
+
+          <div class="assessment-grid">
+            <article class="surface">
+              <strong class="label">Professional growth</strong>
+              <h3>
+                From isolated assignments to professional software decisions
+              </h3>
+              <p>
+                Completing the Computer Science program and building this
+                ePortfolio helped me move from writing code that simply works to
+                building software that is easier to maintain, test, explain, and
+                secure. The capstone made that growth visible because I had to
+                return to earlier artifacts, identify their limits honestly, and
+                strengthen them without losing their original purpose. That
+                process changed how I think about design trade-offs. I now pay
+                closer attention to separation of concerns, validation, evidence
+                for correctness, and the value that each technical decision adds
+                for the intended audience.
+              </p>
+              <p>
+                Beyond the artifacts included in this portfolio, milestone-based
+                coursework in software lifecycle planning and software testing
+                taught me to break large requirements into manageable
+                increments, define acceptance evidence before claiming a feature
+                is complete, and revise work based on structured feedback. Those
+                habits are now part of how I approach every project.
+              </p>
+            </article>
+
+            <article class="surface">
+              <strong class="label">Collaboration and communication</strong>
+              <h3>Working as if the next reader matters</h3>
+              <p>
+                One of the most important lessons from the program is that
+                computer science work is collaborative even when an assignment
+                begins as individual work. The code review portion of this
+                capstone required me to explain existing functionality, identify
+                risks, and justify enhancement plans in a format that peers,
+                instructors, or managers can use to support decision-making.
+                That same mindset shows up in my source code. Clear naming,
+                modular responsibilities, reusable validation, and written
+                narratives all make handoff and review easier.
+              </p>
+              <p>
+                The program also strengthened how I communicate with
+                stakeholders. For technical audiences, I can point to
+                implementation details such as scheduling indexes, MongoDB
+                aggregation pipelines, validation utilities, and audit logging.
+                For non-technical audiences, I can translate those details into
+                benefits such as safer data handling, cleaner architecture, more
+                predictable behavior, and stronger decision-support tools.
+              </p>
+            </article>
+
+            <article class="surface">
+              <strong class="label">Technical strengths</strong>
+              <h3>
+                Data structures, software engineering, databases, and security
+              </h3>
+              <p>
+                The strongest technical theme in my coursework is backend and
+                data-driven development. In data structures and algorithms work,
+                I learned that structure selection should reflect the behavior a
+                system needs to support, not just the easiest collection to use.
+                That is why the enhanced Java artifact now relies on keyed
+                lookup, priority ordering, chronological indexing, and conflict
+                detection instead of only simple identifier-based CRUD.
+              </p>
+              <p>
+                In software engineering and database work, I learned to treat
+                architecture and data access as connected concerns. Reusable
+                abstractions, cleaner module boundaries, and database-side
+                analytics create systems that are easier to extend and easier to
+                explain. Security also became a design habit rather than an
+                afterthought. Removing hardcoded credentials, validating inputs,
+                restricting unsafe operations, and preventing invalid states are
+                all practices that now shape the way I write code.
+              </p>
+            </article>
+
+            <article class="surface">
+              <strong class="label">Portfolio synthesis</strong>
+              <h3>How the artifacts fit together</h3>
+              <p>
+                The artifacts in this portfolio show one consistent direction:
+                building maintainable systems that combine structured data,
+                thoughtful service design, and clear communication. The code
+                review establishes the evaluation process behind the work. The
+                software engineering and database enhancements show how a
+                MongoDB-backed dashboard can be transformed into a more modular
+                and secure application. The algorithms and data structures
+                enhancement shows how a basic Java service suite can evolve into
+                a scheduling-oriented system with stronger retrieval behavior,
+                conflict management, and validation.
+              </p>
+              <p>
+                Taken together, these artifacts represent the kind of developer
+                I aim to be: deliberate about design trade-offs, careful with
+                testing and security, and able to explain technical decisions
+                clearly to different audiences.
+              </p>
+              <div class="download-links">
+                <a
+                  href="assets/docs/cs499_drewlogan_professional_self_assessment.docx"
+                  >Download self-assessment (.docx)</a
+                >
+              </div>
+            </article>
           </div>
         </div>
       </section>
 
-      <section aria-labelledby="portfolio-sections">
-        <div class="section-heading">
-          <span class="eyebrow">Site Map</span>
-          <h2 id="portfolio-sections">Portfolio Sections</h2>
-          <p>
-            This site organizes the CS 499 capstone materials into the sections
-            required for the ePortfolio and the final project narratives. Each
-            section is staged here so it can be expanded as enhancements are
-            completed during the course.
-          </p>
-        </div>
-
-        <div class="portfolio-grid">
-          <article id="code-review">
-            <span class="tag">Code Review</span>
-            <h3>Code Review</h3>
+      <section class="band" id="code-review">
+        <div class="band-inner">
+          <div class="section-heading">
+            <span class="eyebrow">Informal Code Review</span>
+            <h2>
+              The code review documents how the original artifacts were
+              evaluated before enhancement.
+            </h2>
             <p>
-              Findings and observations from reviewing the selected artifacts,
-              with a focus on quality, maintainability, technical debt, and
-              security-sensitive design choices.
+              This review established the baseline for the final project: what
+              each artifact already did well, where it was limited, and how the
+              enhancement plan would address maintainability, algorithmic
+              behavior, database capabilities, and security.
             </p>
-            <ul>
-              <li>Architecture and validation review</li>
-              <li>Risk and defect identification</li>
-              <li>Security-minded analysis</li>
-            </ul>
-          </article>
+          </div>
 
-          <article id="software-engineering">
-            <span class="tag">Category One</span>
-            <h3>Software Engineering and Design Artifact</h3>
-            <p>
-              Planned work built around the CS-320 Java service suite,
-              emphasizing shared interfaces, layered design, and maintainable
-              backend architecture.
-            </p>
-            <ul>
-              <li>Modular service contracts</li>
-              <li>Repository abstraction</li>
-              <li>Facade and validation layers</li>
-            </ul>
-          </article>
+          <div class="story-grid">
+            <div class="media-shell">
+              <video
+                controls
+                preload="metadata"
+                poster="assets/images/code-review-poster.jpg"
+              >
+                <source
+                  src="assets/video/cs499_code_review.mp4"
+                  type="video/mp4"
+                />
+                Your browser does not support embedded video playback.
+              </video>
+            </div>
 
-          <article id="algorithms">
-            <span class="tag">Category Two</span>
-            <h3>Algorithms and Data Structures Artifact</h3>
-            <p>
-              A distinct enhancement path for the same CS-320 artifact, centered
-              on indexed retrieval, scheduling logic, conflict detection, and
-              data-structure trade-offs.
-            </p>
-            <ul>
-              <li>Hash-based ID lookup</li>
-              <li>Ordered scheduling indexes</li>
-              <li>Priority-driven task retrieval</li>
-            </ul>
-          </article>
-
-          <article id="databases">
-            <span class="tag">Category Three</span>
-            <h3>Databases Artifact</h3>
-            <p>
-              Database-centered enhancement planning for the CS-340 animal
-              shelter CRUD layer and Dash dashboard, with stronger analytics and
-              safer query configuration.
-            </p>
-            <ul>
-              <li>MongoDB filtering and aggregation</li>
-              <li>Environment-based configuration</li>
-              <li>Decision-support dashboards</li>
-            </ul>
-          </article>
-
-          <article id="narratives">
-            <span class="tag">Narratives</span>
-            <h3>Narratives</h3>
-            <p>
-              Written explanations that connect each enhancement to design
-              decisions, course outcomes, implementation trade-offs, and
-              audience-focused communication.
-            </p>
-            <ul>
-              <li>Enhancement rationale</li>
-              <li>Trade-off analysis</li>
-              <li>Outcome alignment</li>
-            </ul>
-          </article>
-
-          <article id="self-assessment">
-            <span class="tag">Reflection</span>
-            <h3>Professional Self-Assessment</h3>
-            <p>
-              A capstone reflection that synthesizes software design,
-              algorithms, databases, testing, communication, and security
-              awareness into one professional narrative.
-            </p>
-            <ul>
-              <li>Program growth reflection</li>
-              <li>Career alignment</li>
-              <li>Professional quality standards</li>
-            </ul>
-          </article>
-        </div>
-
-        <div class="highlight" aria-label="Portfolio Direction">
-          <h3>Portfolio Direction</h3>
-          <p>
-            The overall goal of this ePortfolio is to show growth from isolated
-            coursework submissions into an integrated body of backend and
-            full-stack work that manages structured data, supports
-            decision-making, and communicates technical decisions clearly to
-            multiple audiences.
-          </p>
-        </div>
-
-        <div class="footer-note">
-          Prepared as the home page for the CS 499 ePortfolio. This page is
-          intentionally concise so it functions as a clear entry point for
-          artifact links, enhancement narratives, and the final professional
-          self-assessment.
+            <article class="surface">
+              <strong class="label">Review focus</strong>
+              <h3>What the review covered</h3>
+              <ul class="evidence-list">
+                <li>
+                  Existing functionality in the original CS 340 animal shelter
+                  dashboard and the original CS 320 service suite
+                </li>
+                <li>
+                  Areas for improvement in structure, validation, security,
+                  reuse, retrieval behavior, and maintainability
+                </li>
+                <li>
+                  Planned enhancements designed to address all five CS 499
+                  course outcomes across the three required categories
+                </li>
+              </ul>
+              <div class="proof-strip">
+                <div>
+                  <strong>Existing functionality</strong>
+                  A dashboard backed by MongoDB data and a Java service suite
+                  with contact, task, and appointment CRUD behavior.
+                </div>
+                <div>
+                  <strong>Code analysis</strong>
+                  Tight coupling, weak configuration practices, limited
+                  scheduling behavior, and opportunities for more deliberate
+                  validation and abstraction.
+                </div>
+                <div>
+                  <strong>Enhancement plan</strong>
+                  Stronger modularity, safer query handling, improved analytics,
+                  scheduling-aware data structures, and clearer evidence of
+                  security-minded design.
+                </div>
+              </div>
+              <div class="download-links">
+                <a href="assets/video/cs499_code_review.mp4"
+                  >Download embedded review copy</a
+                >
+              </div>
+              <p class="note">
+                The full-resolution source recording remains part of the local
+                course package as <code>milestone1.mov</code>. The embedded MP4
+                is a web-friendly copy for GitHub Pages.
+              </p>
+            </article>
+          </div>
         </div>
       </section>
+
+      <section class="band story" id="software-engineering">
+        <div class="band-inner">
+          <div class="section-heading">
+            <span class="eyebrow">Category One</span>
+            <h2>Software engineering and design artifact</h2>
+            <p>
+              For the software engineering and design category, I used the CS
+              340 animal shelter dashboard artifact and focused the enhancement
+              on modularity, configuration, responsibility boundaries, and
+              maintainable backend structure.
+            </p>
+          </div>
+
+          <div class="story-grid">
+            <div class="story-copy">
+              <div class="artifact-meta">
+                <span>Original course: CS 340</span>
+                <span>Original artifact: ProjectTwoDashboard.ipynb</span>
+                <span>Enhanced artifact: modular Dash + Python bundle</span>
+              </div>
+
+              <article class="surface">
+                <strong class="label">Narrative summary</strong>
+                <h3>Why this artifact belongs in the portfolio</h3>
+                <p>
+                  The original artifact demonstrated practical database-backed
+                  functionality, but too much responsibility was concentrated in
+                  the dashboard layer. The enhancement reworked the project into
+                  a more deliberate software design by separating configuration,
+                  CRUD behavior, rescue query logic, analytics, and presentation
+                  responsibilities.
+                </p>
+                <p>
+                  The most important software engineering improvements were
+                  moving credentials into environment-based configuration,
+                  introducing validated CRUD operations with controlled
+                  projection, sort, and limit behavior, and extracting
+                  rescue-specific query logic into its own module. Those changes
+                  made the artifact easier to reason about, easier to extend,
+                  and more representative of production-style design choices.
+                </p>
+              </article>
+
+              <article class="surface">
+                <strong class="label">Before and after</strong>
+                <table class="comparison-table">
+                  <thead>
+                    <tr>
+                      <th>Original artifact</th>
+                      <th>Enhanced artifact</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Notebook-centered dashboard workflow</td>
+                      <td>
+                        Modular Dash application with reusable Python modules
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        Simple connection and filter logic tied closely to the
+                        UI
+                      </td>
+                      <td>
+                        Environment-based configuration and a dedicated rescue
+                        query module
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Limited control over query behavior</td>
+                      <td>
+                        Validated CRUD operations with projection, sorting,
+                        limits, and aggregation support
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Analytics treated mainly as dashboard-side work</td>
+                      <td>
+                        Backend and data-access layers designed to support
+                        analytics more deliberately
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </article>
+            </div>
+
+            <div class="story-copy">
+              <article class="surface">
+                <strong class="label">Key evidence</strong>
+                <h3>Representative design changes</h3>
+                <ul class="evidence-list">
+                  <li>
+                    Environment-driven MongoDB configuration through
+                    <code>MongoConfig.from_env()</code>
+                  </li>
+                  <li>
+                    Dedicated <code>rescue_queries.py</code> module for filter
+                    construction and labels
+                  </li>
+                  <li>
+                    Validated CRUD interface with projection, sort, and limit
+                    support
+                  </li>
+                  <li>
+                    Dashboard responsibilities narrowed toward presentation and
+                    decision support
+                  </li>
+                </ul>
+              </article>
+
+              <article class="surface">
+                <strong class="label">Code excerpt</strong>
+                <div class="code-block">
+                  <code>
+                    class MongoConfig:<br />
+                    &nbsp;&nbsp;@classmethod<br />
+                    &nbsp;&nbsp;def from_env(cls):<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;username =
+                    os.getenv("AAC_MONGO_USERNAME")<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;password =
+                    os.getenv("AAC_MONGO_PASSWORD")<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;if not username or not password:<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;raise
+                    ValueError("MongoDB credentials are missing.")<br />
+                  </code>
+                </div>
+              </article>
+
+              <article class="surface">
+                <strong class="label">Verification</strong>
+                <h3>Local evidence captured from this bundle</h3>
+                <div class="code-block">
+                  <code>CS340 enhancement smoke test passed</code>
+                </div>
+                <p class="note">
+                  Local validation included Python syntax checks for the bundle
+                  and the included smoke test for CRUD, aggregation, and rescue
+                  query helpers.
+                </p>
+              </article>
+
+              <div class="download-links">
+                <a href="assets/docs/cs499_drewlogan_milestone2.docx"
+                  >Module Three narrative</a
+                >
+                <a
+                  href="assets/artifacts/cs340/original/ProjectTwoDashboard.ipynb"
+                  >Original notebook</a
+                >
+                <a href="assets/artifacts/cs340/enhanced/dashboard_app.py"
+                  >Enhanced dashboard app</a
+                >
+                <a href="assets/artifacts/cs340/enhanced/animal_shelter.py"
+                  >Enhanced CRUD layer</a
+                >
+                <a href="assets/artifacts/cs499_drewlogan_m5Mstone.zip"
+                  >Full CS 340 bundle (.zip)</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="band story" id="algorithms">
+        <div class="band-inner">
+          <div class="section-heading">
+            <span class="eyebrow">Category Two</span>
+            <h2>Algorithms and data structures artifact</h2>
+            <p>
+              For the algorithms and data structures category, I used the CS 320
+              service suite and enhanced it into a more realistic scheduling
+              system with priority-aware task retrieval, chronological
+              appointment indexing, and conflict detection.
+            </p>
+          </div>
+
+          <div class="story-grid">
+            <div class="story-copy">
+              <div class="artifact-meta">
+                <span>Original course: CS 320</span>
+                <span
+                  >Original artifact: module 6 contact, task, and appointment
+                  services</span
+                >
+                <span>Enhanced artifact: scheduling-oriented Java bundle</span>
+              </div>
+
+              <article class="surface">
+                <strong class="label">Narrative summary</strong>
+                <h3>How the enhancement changed the artifact</h3>
+                <p>
+                  The original service suite already showed validation and
+                  service-level CRUD behavior, but the three services were still
+                  largely independent in-memory classes built around basic
+                  <code>HashMap</code> storage. The original task service
+                  focused on ID-based create, update, and delete operations,
+                  while the original appointment service only enforced unique
+                  IDs and basic lookup and deletion. The enhancement redesigned
+                  the internal organization of tasks and appointments so the
+                  program could support more useful retrieval and more
+                  deliberate correctness checks.
+                </p>
+                <p>
+                  Tasks now track both priority and due dates, allowing the
+                  service to return urgent work first instead of only supporting
+                  direct ID lookup. Appointments now use a chronological index
+                  by day and reject overlapping time slots. The artifact also
+                  gained shared CRUD abstractions, reusable validation
+                  utilities, a facade, and audit logging so the solution feels
+                  like a coherent service layer rather than a set of unrelated
+                  classes.
+                </p>
+              </article>
+
+              <article class="surface">
+                <strong class="label">Before and after</strong>
+                <table class="comparison-table">
+                  <thead>
+                    <tr>
+                      <th>Original artifact</th>
+                      <th>Enhanced artifact</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <code>HashMap</code>-backed task CRUD with ID lookup
+                        only
+                      </td>
+                      <td>
+                        Priority ordering and deadline-based task retrieval
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        Appointment add, delete, and lookup without scheduling
+                        logic
+                      </td>
+                      <td>Chronological day buckets with overlap detection</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        Three standalone service classes with no shared
+                        abstraction layer
+                      </td>
+                      <td>
+                        Shared CRUD abstractions, facade coordination, and audit
+                        trail support
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        Validation focused on field rules and unique identifiers
+                      </td>
+                      <td>
+                        Validation extended into scheduling correctness and
+                        safer update paths
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </article>
+            </div>
+
+            <div class="story-copy">
+              <article class="surface">
+                <strong class="label">Key evidence</strong>
+                <h3>Data structures chosen for behavior, not convenience</h3>
+                <ul class="evidence-list">
+                  <li>
+                    <code>TreeSet</code>-backed task ordering for urgency-based
+                    retrieval
+                  </li>
+                  <li>
+                    <code
+                      >TreeMap&lt;LocalDate, List&lt;Appointment&gt;&gt;</code
+                    >
+                    for day-based scheduling and date-range queries
+                  </li>
+                  <li>
+                    Binary-search insertion plus adjacency conflict checks for
+                    appointments
+                  </li>
+                  <li>
+                    Common abstractions and audit logging that support
+                    maintainability around the algorithmic changes
+                  </li>
+                </ul>
+              </article>
+
+              <article class="surface">
+                <strong class="label">Code excerpt</strong>
+                <div class="code-block">
+                  <code>
+                    private final NavigableSet&lt;Task&gt; tasksByPriority = new
+                    TreeSet&lt;&gt;(TASK_ORDER);<br />
+                    <br />
+                    private final NavigableMap&lt;LocalDate,
+                    List&lt;Appointment&gt;&gt; appointmentsByDay = new
+                    TreeMap&lt;&gt;();<br />
+                    <br />
+                    private void validateNoConflict(List&lt;Appointment&gt;
+                    dayBucket, Appointment candidate, int insertIndex) {<br />
+                    &nbsp;&nbsp;// reject overlapping appointments before they
+                    are stored<br />
+                    }<br />
+                  </code>
+                </div>
+              </article>
+
+              <article class="surface">
+                <strong class="label">Verification</strong>
+                <h3>Local evidence captured from this bundle</h3>
+                <div class="code-block">
+                  <code>
+                    Contacts: 1<br />
+                    Top task: T1<br />
+                    Appointments on review day: 1<br />
+                    Audit events: 5
+                  </code>
+                </div>
+                <p class="note">
+                  Local validation compiled the Java sources and ran the
+                  bundle's included smoke-test demo. The artifact package also
+                  includes JUnit sources, but the current folder does not
+                  include the external JUnit runtime.
+                </p>
+              </article>
+
+              <div class="download-links">
+                <a href="assets/docs/cs499_drewlogan_mstone3.docx"
+                  >Module Four narrative</a
+                >
+                <a
+                  href="assets/artifacts/cs320/original/TaskService/TaskService.java"
+                  >Original task service</a
+                >
+                <a
+                  href="assets/artifacts/cs320/original/AppointmentService/AppointmentService.java"
+                  >Original appointment service</a
+                >
+                <a
+                  href="assets/artifacts/cs320/enhanced/edu/snhu/cs499/task/TaskService.java"
+                  >Task service source</a
+                >
+                <a
+                  href="assets/artifacts/cs320/enhanced/edu/snhu/cs499/appointment/AppointmentService.java"
+                  >Appointment service source</a
+                >
+                <a
+                  href="assets/artifacts/cs320/enhanced/edu/snhu/cs499/facade/SchedulerFacade.java"
+                  >Facade source</a
+                >
+                <a href="assets/artifacts/cs320-drewlogan-project1.zip"
+                  >Original CS 320 zip</a
+                >
+                <a href="assets/artifacts/cs499_drewlogan_mstone3.zip"
+                  >Enhanced CS 320 zip</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="band story" id="databases">
+        <div class="band-inner">
+          <div class="section-heading">
+            <span class="eyebrow">Category Three</span>
+            <h2>Databases artifact</h2>
+            <p>
+              For the database category, I returned to the CS 340 animal shelter
+              project and emphasized stronger query control, MongoDB
+              aggregation, and data-access decisions that support analytics and
+              safer database interaction.
+            </p>
+          </div>
+
+          <div class="story-grid">
+            <div class="story-copy">
+              <article class="surface">
+                <strong class="label">Narrative summary</strong>
+                <h3>Why the database enhancement is distinct</h3>
+                <p>
+                  The same CS 340 artifact works for both software engineering
+                  and database outcomes because the final enhancement changed
+                  not only the application structure, but also the way database
+                  work is performed. Instead of leaving the project at the level
+                  of basic CRUD, the enhancement adds validated projections,
+                  controlled sort and limit behavior, aggregation pipelines for
+                  summary analytics, and geolocation-oriented retrieval support.
+                </p>
+                <p>
+                  The database layer also now rejects unsafe field names and
+                  restricts which query, update, and aggregation operators are
+                  allowed. That change demonstrates a stronger security mindset
+                  because it treats database access as an interface that must be
+                  validated, not just a thin pass-through to MongoDB.
+                </p>
+              </article>
+
+              <article class="surface">
+                <strong class="label">Before and after</strong>
+                <table class="comparison-table">
+                  <thead>
+                    <tr>
+                      <th>Original artifact</th>
+                      <th>Enhanced artifact</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        Database access centered on basic reads and writes
+                      </td>
+                      <td>
+                        CRUD plus validated projection, sorting, limiting, and
+                        aggregation
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Analytics handled mainly after retrieval</td>
+                      <td>
+                        MongoDB aggregation pipelines for breed and outcome
+                        summaries
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Less deliberate control over query shape</td>
+                      <td>
+                        Whitelisted operators, field validation, and stage
+                        validation
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Dashboard-driven filtering only</td>
+                      <td>
+                        Reusable data-access layer supporting analytics and
+                        mapping scenarios
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </article>
+            </div>
+
+            <div class="story-copy">
+              <article class="surface">
+                <strong class="label">Key evidence</strong>
+                <h3>Database-oriented improvements</h3>
+                <ul class="evidence-list">
+                  <li>
+                    Aggregation helpers for breed counts and outcome
+                    distribution
+                  </li>
+                  <li>
+                    Geolocation point retrieval for map-driven dashboard views
+                  </li>
+                  <li>
+                    Sanitized query, projection, sort, update, and aggregation
+                    stage handling
+                  </li>
+                  <li>
+                    Environment-based credentials instead of hardcoded database
+                    secrets
+                  </li>
+                </ul>
+              </article>
+
+              <article class="surface">
+                <strong class="label">Code excerpt</strong>
+                <div class="code-block">
+                  <code>
+                    pipeline = [<br />
+                    &nbsp;&nbsp;{"$match": self._sanitize_query(query or
+                    {})},<br />
+                    &nbsp;&nbsp;{"$group": {"_id": "$breed", "count": {"$sum":
+                    1}}},<br />
+                    &nbsp;&nbsp;{"$sort": {"count": -1, "_id": 1}},<br />
+                    &nbsp;&nbsp;{"$limit": top_n},<br />
+                    &nbsp;&nbsp;{"$project": {"breed": "$_id", "count": 1,
+                    "_id": 0}},<br />
+                    ]
+                  </code>
+                </div>
+              </article>
+
+              <article class="surface">
+                <strong class="label">Verification</strong>
+                <h3>Local evidence captured from this bundle</h3>
+                <div class="code-block">
+                  <code>CS340 enhancement smoke test passed</code>
+                </div>
+                <p class="note">
+                  The smoke test exercises the validated CRUD layer, aggregation
+                  helper path, and rescue-query helpers with a fake collection
+                  so the database logic can be checked without a live MongoDB
+                  dependency.
+                </p>
+              </article>
+
+              <div class="download-links">
+                <a href="assets/docs/cs499_drewlogan_m5Milestone.docx"
+                  >Module Five narrative</a
+                >
+                <a href="assets/artifacts/cs340/enhanced/animal_shelter.py"
+                  >Database access layer</a
+                >
+                <a href="assets/artifacts/cs340/enhanced/rescue_queries.py"
+                  >Rescue query helpers</a
+                >
+                <a
+                  href="assets/artifacts/cs340/original/ProjectTwoDashboard.ipynb"
+                  >Original dashboard notebook</a
+                >
+                <a href="assets/artifacts/cs499_drewlogan_m5Mstone.zip"
+                  >Full CS 340 bundle (.zip)</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="band" id="outcomes">
+        <div class="band-inner">
+          <div class="section-heading">
+            <span class="eyebrow">Outcome Coverage</span>
+            <h2>How the portfolio addresses the five CS 499 course outcomes</h2>
+            <p>
+              The portfolio is designed so the written, visual, and technical
+              elements work together rather than standing alone. Each outcome is
+              supported by more than one artifact or portfolio element.
+            </p>
+          </div>
+
+          <div class="outcome-table">
+            <h3>Course outcome alignment</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Outcome</th>
+                  <th>Evidence in this portfolio</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    Collaborative environments and decision-making support
+                  </td>
+                  <td>
+                    The code review video, the portfolio narratives, and the
+                    decision-support orientation of the CS 340 dashboard show
+                    how technical work is explained for peers, reviewers, and
+                    organizational audiences.
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Professional-quality oral, written, and visual communication
+                  </td>
+                  <td>
+                    The embedded code review, the self-assessment, and the
+                    structured GitHub Pages presentation are designed for clear
+                    navigation, polished writing, and audience-appropriate
+                    technical explanation.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Algorithmic principles and design trade-offs</td>
+                  <td>
+                    The CS 320 enhancement demonstrates intentional structure
+                    choices for priority retrieval, chronological ordering,
+                    range queries, and scheduling conflict detection.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Well-founded and innovative computing techniques</td>
+                  <td>
+                    The portfolio shows reusable CRUD abstractions, audit
+                    logging, MongoDB aggregation, smoke-test evidence, and
+                    deliberate enhancement planning across multiple categories.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Security mindset and mitigation of vulnerabilities</td>
+                  <td>
+                    Environment-based configuration, sanitized query handling,
+                    restricted operators, validation utilities, and safer update
+                    paths all demonstrate security-minded design.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="band" id="downloads">
+        <div class="band-inner">
+          <div class="section-heading">
+            <span class="eyebrow">Final Deliverables</span>
+            <h2>Documents, source bundles, and portfolio files</h2>
+            <p>
+              The GitHub Pages site is the front door for the capstone, but the
+              source files and Word documents are also included so the final
+              submission package remains complete.
+            </p>
+          </div>
+
+          <div class="download-grid">
+            <article class="download-board">
+              <strong class="label">Required writing</strong>
+              <h3>Word documents</h3>
+              <ul>
+                <li>Professional self-assessment</li>
+                <li>Module Three software engineering narrative</li>
+                <li>Module Four algorithms and data structures narrative</li>
+                <li>Module Five databases narrative</li>
+              </ul>
+              <div class="download-links">
+                <a
+                  href="assets/docs/cs499_drewlogan_professional_self_assessment.docx"
+                  >Self-assessment</a
+                >
+                <a href="assets/docs/cs499_drewlogan_milestone2.docx"
+                  >Milestone 2 narrative</a
+                >
+                <a href="assets/docs/cs499_drewlogan_mstone3.docx"
+                  >Milestone 3 narrative</a
+                >
+                <a href="assets/docs/cs499_drewlogan_m5Milestone.docx"
+                  >Milestone 4 narrative</a
+                >
+              </div>
+            </article>
+
+            <article class="download-board">
+              <strong class="label">Code review</strong>
+              <h3>Video evidence</h3>
+              <ul>
+                <li>Embedded MP4 for GitHub Pages playback</li>
+                <li>
+                  High-resolution source recording retained in the local course
+                  package
+                </li>
+                <li>Poster image for fast page loading and clear preview</li>
+              </ul>
+              <div class="download-links">
+                <a href="assets/video/cs499_code_review.mp4">Code review MP4</a>
+                <a href="assets/images/code-review-poster.jpg">Poster image</a>
+              </div>
+            </article>
+
+            <article class="download-board">
+              <strong class="label">Artifact source</strong>
+              <h3>CS 340 animal shelter files</h3>
+              <ul>
+                <li>Original dashboard notebook</li>
+                <li>Enhanced dashboard application and CRUD layer</li>
+                <li>Rescue query helper module and smoke test</li>
+                <li>Full ZIP bundle copied from the course package</li>
+              </ul>
+              <div class="download-links">
+                <a
+                  href="assets/artifacts/cs340/original/ProjectTwoDashboard.ipynb"
+                  >Original notebook</a
+                >
+                <a href="assets/artifacts/cs340/enhanced/dashboard_app.py"
+                  >Enhanced app</a
+                >
+                <a
+                  href="assets/artifacts/cs340/enhanced/test_cs340_enhancement.py"
+                  >Smoke test</a
+                >
+                <a href="assets/artifacts/cs499_drewlogan_m5Mstone.zip"
+                  >CS 340 ZIP bundle</a
+                >
+              </div>
+            </article>
+
+            <article class="download-board">
+              <strong class="label">Artifact source</strong>
+              <h3>CS 320 Java service bundle</h3>
+              <ul>
+                <li>
+                  Original module 6 zip and extracted pre-enhancement source
+                  folders
+                </li>
+                <li>
+                  Enhanced Java source tree for contacts, tasks, and
+                  appointments
+                </li>
+                <li>Facade, validation utilities, and audit logging support</li>
+                <li>
+                  Original and enhanced files now linked side by side for direct
+                  comparison
+                </li>
+                <li>Both ZIP bundles copied from the course package</li>
+              </ul>
+              <div class="download-links">
+                <a href="assets/artifacts/cs320-drewlogan-project1.zip"
+                  >Original CS 320 zip</a
+                >
+                <a
+                  href="assets/artifacts/cs320/original/TaskService/TaskService.java"
+                  >Original task service</a
+                >
+                <a
+                  href="assets/artifacts/cs320/original/AppointmentService/AppointmentService.java"
+                  >Original appointment service</a
+                >
+                <a
+                  href="assets/artifacts/cs320/enhanced/edu/snhu/cs499/task/Task.java"
+                  >Task model</a
+                >
+                <a
+                  href="assets/artifacts/cs320/enhanced/edu/snhu/cs499/task/TaskService.java"
+                  >Task service</a
+                >
+                <a
+                  href="assets/artifacts/cs320/enhanced/edu/snhu/cs499/appointment/AppointmentService.java"
+                  >Appointment service</a
+                >
+                <a href="assets/artifacts/cs499_drewlogan_mstone3.zip"
+                  >Enhanced CS 320 zip</a
+                >
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        Portfolio prepared for the CS 499 final project using the artifacts,
+        narratives, and video assets provided in the course package.
+      </footer>
     </main>
   </body>
 </html>
